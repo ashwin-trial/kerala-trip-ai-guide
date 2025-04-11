@@ -1,16 +1,19 @@
 
 import { useState, useEffect } from 'react';
 import { useToast } from "@/hooks/use-toast";
+import { Link } from 'react-router-dom';
 import ChatInterface, { Message } from '@/components/ChatInterface';
 import ItineraryDisplay, { Itinerary } from '@/components/ItineraryDisplay';
 import { processUserMessage } from '@/services/aiService';
 import generatePDF from '@/utils/pdfGenerator';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Home, Menu, X } from 'lucide-react';
 
 const Index = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [itinerary, setItinerary] = useState<Itinerary | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { toast } = useToast();
   const isMobile = useIsMobile();
   
@@ -84,32 +87,38 @@ const Index = () => {
     const [showChat, setShowChat] = useState(true);
     
     return (
-      <div className="flex flex-col h-screen">
-        <header className="flex justify-between items-center p-4 bg-kerala-green text-white">
-          <h1 className="text-xl font-heading">Kerala Trip Planner</h1>
+      <div className="flex flex-col h-screen bg-faroe-dark">
+        {/* Floating Navbar */}
+        <header className="fixed top-4 left-4 right-4 z-50 rounded-full bg-faroe-dark/80 border border-faroe-gold/30 backdrop-blur-md shadow-lg flex justify-between items-center p-3 px-5">
+          <Link to="/" className="text-faroe-gold font-serif text-xl flex items-center">
+            <Home className="w-5 h-5 mr-2" />
+            Kerala Trips
+          </Link>
           <button 
             onClick={() => setShowChat(!showChat)}
-            className="px-3 py-1 bg-white/20 rounded text-sm"
+            className="px-3 py-1 bg-faroe-gold/20 hover:bg-faroe-gold/30 text-faroe-gold rounded-full text-sm transition-colors"
           >
             {showChat ? 'View Itinerary' : 'Back to Chat'}
           </button>
         </header>
         
-        <main className="flex-1 overflow-hidden">
-          {showChat ? (
-            <div className="h-full">
-              <ChatInterface
-                messages={messages}
-                onSendMessage={handleSendMessage}
-                isProcessing={isProcessing}
-                onExportPDF={handleExportPDF}
-              />
-            </div>
-          ) : (
-            <div className="h-full">
-              <ItineraryDisplay itinerary={itinerary} onExportPDF={handleExportPDF} />
-            </div>
-          )}
+        <main className="flex-1 overflow-hidden pt-16 p-4">
+          <div className="max-w-3xl mx-auto h-full">
+            {showChat ? (
+              <div className="h-full">
+                <ChatInterface
+                  messages={messages}
+                  onSendMessage={handleSendMessage}
+                  isProcessing={isProcessing}
+                  onExportPDF={handleExportPDF}
+                />
+              </div>
+            ) : (
+              <div className="h-full bg-faroe-dark/90 backdrop-blur-sm rounded-2xl border border-faroe-gold/20 shadow-xl overflow-auto">
+                <ItineraryDisplay itinerary={itinerary} onExportPDF={handleExportPDF} />
+              </div>
+            )}
+          </div>
         </main>
       </div>
     );
@@ -117,13 +126,69 @@ const Index = () => {
 
   // Desktop view shows split panels
   return (
-    <div className="flex flex-col h-screen">
-      <header className="p-4 bg-gradient-to-r from-kerala-green to-kerala-blue text-white">
-        <h1 className="text-2xl font-heading text-center">Kerala Trip Planner AI</h1>
+    <div className="flex flex-col h-screen bg-faroe-dark">
+      {/* Floating Navbar */}
+      <header className="fixed top-6 left-6 right-6 z-50 rounded-full bg-faroe-dark/80 border border-faroe-gold/30 backdrop-blur-md shadow-lg">
+        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+          <Link to="/" className="text-faroe-gold font-serif text-xl flex items-center">
+            <Home className="w-5 h-5 mr-2" />
+            Kerala Trips
+          </Link>
+          
+          <div className="hidden md:flex space-x-6 text-white/80">
+            <Link to="/" className="hover:text-faroe-gold transition-colors">Home</Link>
+            <Link to="/planner" className="text-faroe-gold">Trip Planner</Link>
+            <a href="#destinations" className="hover:text-faroe-gold transition-colors">Destinations</a>
+            <a href="#about" className="hover:text-faroe-gold transition-colors">About</a>
+          </div>
+          
+          <div className="md:hidden">
+            <button 
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-faroe-gold"
+            >
+              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+        
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-faroe-dark/95 backdrop-blur-md border-t border-faroe-gold/20 rounded-b-3xl overflow-hidden shadow-lg">
+            <div className="flex flex-col space-y-3 p-4">
+              <Link to="/" 
+                className="px-4 py-2 hover:bg-faroe-gold/10 rounded-lg text-white/80 hover:text-faroe-gold transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link to="/planner" 
+                className="px-4 py-2 bg-faroe-gold/10 rounded-lg text-faroe-gold"
+                onClick={() => setMenuOpen(false)}
+              >
+                Trip Planner
+              </Link>
+              <a 
+                href="#destinations" 
+                className="px-4 py-2 hover:bg-faroe-gold/10 rounded-lg text-white/80 hover:text-faroe-gold transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Destinations
+              </a>
+              <a 
+                href="#about" 
+                className="px-4 py-2 hover:bg-faroe-gold/10 rounded-lg text-white/80 hover:text-faroe-gold transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                About
+              </a>
+            </div>
+          </div>
+        )}
       </header>
       
-      <main className="flex-1 flex overflow-hidden">
-        <div className="w-1/2 border-r">
+      <main className="flex-1 flex overflow-hidden pt-24 p-6">
+        <div className="w-1/2 pr-3">
           <ChatInterface
             messages={messages}
             onSendMessage={handleSendMessage}
@@ -131,12 +196,14 @@ const Index = () => {
             onExportPDF={handleExportPDF}
           />
         </div>
-        <div className="w-1/2">
-          <ItineraryDisplay itinerary={itinerary} onExportPDF={handleExportPDF} />
+        <div className="w-1/2 pl-3">
+          <div className="h-full bg-faroe-dark/90 backdrop-blur-sm rounded-2xl border border-faroe-gold/20 shadow-xl overflow-auto">
+            <ItineraryDisplay itinerary={itinerary} onExportPDF={handleExportPDF} />
+          </div>
         </div>
       </main>
       
-      <footer className="p-3 bg-muted text-center text-sm text-muted-foreground">
+      <footer className="py-3 px-6 text-center text-sm text-white/50 bg-faroe-dark/50 backdrop-blur-sm border-t border-faroe-gold/10">
         <p>Kerala Trip Planner AI · Plan your dream vacation to God's Own Country</p>
       </footer>
     </div>

@@ -119,19 +119,19 @@
   }
   
   .chat-bubble {
-    @apply rounded-lg p-4 max-w-[80%] animate-slide-in;
+    @apply rounded-xl p-4 max-w-[80%] animate-slide-in;
   }
   
   .chat-bubble-user {
-    @apply chat-bubble bg-primary text-faroe-dark ml-auto;
+    @apply chat-bubble bg-faroe-gold/90 text-faroe-dark ml-auto backdrop-blur-sm border border-faroe-gold;
   }
   
   .chat-bubble-ai {
-    @apply chat-bubble bg-muted mr-auto;
+    @apply chat-bubble bg-faroe-gray-light/10 mr-auto backdrop-blur-sm border border-faroe-gold/20 text-white;
   }
   
   .destination-card {
-    @apply rounded-lg overflow-hidden border shadow-sm hover:shadow-md transition-shadow;
+    @apply rounded-xl overflow-hidden border border-faroe-gold/20 shadow-sm hover:shadow-lg transition-shadow backdrop-blur-sm;
   }
   
   .destination-card-image {
@@ -139,7 +139,7 @@
   }
   
   .gold-button {
-    @apply bg-faroe-gold text-faroe-dark hover:bg-faroe-gold/90 px-6 py-3 font-medium transition-colors;
+    @apply bg-faroe-gold text-faroe-dark hover:bg-faroe-gold/90 px-6 py-3 font-medium transition-colors rounded-full;
   }
   
   .dotted-path {
@@ -150,5 +150,29 @@
 @layer utilities {
   .stroke-dasharray-\[5\,5\] {
     stroke-dasharray: 5, 5;
+  }
+  
+  /* Custom scrollbar */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(217, 186, 85, 0.2);
+    border-radius: 20px;
+  }
+  
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(217, 186, 85, 0.2) transparent;
+  }
+  
+  /* Glass effect utilities */
+  .glass-effect {
+    @apply backdrop-blur-md bg-faroe-dark/70 border border-faroe-gold/20;
   }
 }
