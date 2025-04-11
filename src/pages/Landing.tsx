@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Facebook, Instagram, Twitter } from 'lucide-react';
@@ -61,7 +60,7 @@ const Landing = () => {
           <path
             d="M40,0 Q60,150 40,300 Q20,450 40,600 Q60,750 40,900"
             fill="none"
-            className="dotted-path animate-path-draw"
+            className="stroke-faroe-gold stroke-dasharray-[5,5] stroke-2 animate-path-draw"
           />
         </svg>
         
@@ -102,7 +101,7 @@ const Landing = () => {
           <path
             d="M40,0 Q20,150 40,300 Q60,450 40,600"
             fill="none"
-            className="dotted-path animate-path-draw"
+            className="stroke-faroe-gold stroke-dasharray-[5,5] stroke-2 animate-path-draw"
           />
         </svg>
         

@@ -143,6 +143,12 @@ export default {
 				sans: ['Inter', 'sans-serif'],
 				heading: ['Poppins', 'sans-serif'],
 				serif: ['Playfair Display', 'serif'] // Adding serif font for the elegant headings
+			},
+			stroke: {
+				'2': '2px',
+			},
+			strokeDasharray: {
+				'5,5': '5, 5',
 			}
 		}
 	},
