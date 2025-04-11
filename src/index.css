@@ -143,12 +143,16 @@
   }
   
   .dotted-path {
-    @apply stroke-faroe-gold stroke-2;
+    @apply stroke-faroe-gold stroke-2 stroke-dash-5-5;
+  }
+  
+  .glass-card {
+    @apply bg-faroe-gray-dark/30 backdrop-blur-sm border border-faroe-gold/10 shadow-lg;
   }
 }
 
 @layer utilities {
-  .stroke-dasharray-\[5\,5\] {
+  .stroke-dash-5-5 {
     stroke-dasharray: 5, 5;
   }
   
