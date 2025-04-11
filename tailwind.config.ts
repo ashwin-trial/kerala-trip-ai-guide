@@ -63,22 +63,37 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Kerala-inspired colors
+				// Kerala-inspired colors updated to match the darker theme from the image
 				kerala: {
 					green: {
-						light: '#3a8969',
-						DEFAULT: '#1e593b',
-						dark: '#124126'
+						light: '#4a6850',
+						DEFAULT: '#314536',
+						dark: '#1e2a21'
 					},
 					blue: {
-						light: '#5dadcf',
-						DEFAULT: '#1a7b99',
-						dark: '#0f5a73'
+						light: '#5d8ca0',
+						DEFAULT: '#3d5d6a',
+						dark: '#263840'
 					},
 					sand: {
-						light: '#e8c089',
-						DEFAULT: '#d9a76a',
-						dark: '#c08f4f'
+						light: '#e9d190',
+						DEFAULT: '#d9ba55', // Golden accent color from the image
+						dark: '#b39a45'
+					}
+				},
+				// New theme colors based on the image
+				faroe: {
+					dark: '#1a1a18', // Very dark background
+					gold: '#d9ba55', // Gold accent for buttons
+					green: {
+						light: '#7c9a6e',
+						DEFAULT: '#506b46',
+						dark: '#374a30'
+					},
+					gray: {
+						light: '#484848',
+						DEFAULT: '#343434',
+						dark: '#222222'
 					}
 				}
 			},
@@ -111,17 +126,23 @@ export default {
 				'slide-in': {
 					'0%': { transform: 'translateY(10px)', opacity: '0' },
 					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'path-animation': {
+					'0%': { 'stroke-dashoffset': '1000' },
+					'100%': { 'stroke-dashoffset': '0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
-				'slide-in': 'slide-in 0.5s ease-out'
+				'slide-in': 'slide-in 0.5s ease-out',
+				'path-draw': 'path-animation 2s ease-out forwards'
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
-				heading: ['Poppins', 'sans-serif']
+				heading: ['Poppins', 'sans-serif'],
+				serif: ['Playfair Display', 'serif'] // Adding serif font for the elegant headings
 			}
 		}
 	},
