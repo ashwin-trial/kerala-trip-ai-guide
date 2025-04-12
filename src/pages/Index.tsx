@@ -82,10 +82,11 @@ const Index = () => {
     }
   };
 
+  // Mobile view with state for showing chat or itinerary
+  const [showChat, setShowChat] = useState(true);
+  
   // Mobile view shows only one panel at a time with a toggle
   if (isMobile) {
-    const [showChat, setShowChat] = useState(true);
-    
     return (
       <div className="flex flex-col h-screen bg-faroe-dark">
         {/* Floating Navbar */}
